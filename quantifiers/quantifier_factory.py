@@ -1,4 +1,4 @@
-from quantifiers.classify_count import CC, ACC
+from quantifiers.classify_count import CC, ACC, PCC
 
 
 class QuantifierFactory:
@@ -9,7 +9,7 @@ class QuantifierFactory:
         elif quantifier_type == "acc":
             return ACC.ACC()
         elif quantifier_type == "pcc":
-            return None
+            return PCC.PCC()
         elif quantifier_type == "pacc":
             return None
         elif quantifier_type == "x":
