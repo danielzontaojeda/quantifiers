@@ -18,7 +18,9 @@ COUNTERS = ("CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS", "
 N_ITERATIONS = 3
 
 # Define different test sizes for samples
-BATCH_SIZES = [100, 200]
+BATCH_SIZES = [300]
 
 # Define different positive proportions for the samples
-ALPHA_VALUES = [round(x, 2) for x in np.linspace(0, 1, 11)]  # class proportion
+ALPHA_VALUES = [round(x, 2) for x in np.linspace(0, 1, 11)]
+
+MEASURE = "topsoe"
