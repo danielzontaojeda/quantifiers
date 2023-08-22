@@ -1,8 +1,8 @@
-from quantifiers.Quantifier import Quantifier
+from quantifiers.quantifier import Quantifier
 
 
-class ClassifyCount(Quantifier):
-    def setTprFpr(self, X_train):
+class CC(Quantifier):
+    def setTprFpr(self, X_train, y_train):
         pass
 
     def predict(self, X_test, thr=0.5):

@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Quantifier(ABC):
     @abstractmethod
-    def setTprFpr(self, X_train):
+    def setTprFpr(self, X_train, y_train):
         pass
 
     @abstractmethod
