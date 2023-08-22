@@ -3,12 +3,14 @@ import sys
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from config import COUNTERS, N_ITERATIONS, ALPHA_VALUES, BATCH_SIZES, MEASURE
+from quantifiers.QuantifierFactory import QuantifierFactory
 
 
-def apply_quantifier(quantifier, thr, measure, train_test, test_sample):
-    print(
-        f"quantifier = {quantifier}, thr = {thr}, measure = {measure}, train_test = {len(train_test)}, test_sample = {len(test_sample)}"
-    )
+def apply_quantifier(quantifier_name, thr, measure, train_test, test_sample):
+    factory = QuantifierFactory()
+    quantifier = factory.create_quantifier(quantifier_name)
+    if quantifier:
+        pass
 
 
 def run_quantifiers(scores, classes):
@@ -62,7 +64,7 @@ def run_quantifiers(scores, classes):
 
                 for quantifier in COUNTERS:
                     pred_pos_prop = apply_quantifier(
-                        quantifier=quantifier,
+                        quantifier_name=quantifier,
                         thr=0.5,
                         measure=MEASURE,
                         train_test=train_test,

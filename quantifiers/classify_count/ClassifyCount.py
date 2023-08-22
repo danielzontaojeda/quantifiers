@@ -1,5 +1,12 @@
-from quantifiers import Quantifier
+from quantifiers.Quantifier import Quantifier
 
 
 class ClassifyCount(Quantifier):
-    pass
+    
+
+    def setTprFpr(self, X_train):
+        pass
+
+    def predict(self, X_test):
+        pass
+
