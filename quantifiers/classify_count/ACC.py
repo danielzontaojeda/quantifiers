@@ -9,12 +9,10 @@ class ACC(Quantifier):
         count = sum(1 for i in test_scores if i >= thr)
         cc_ouput = round(count / len(test_scores), 2)
 
-        tprfpr = self.tprfpr.query(f"threshold == {thr}")
-        tprfpr.loc[:, "fpr"] = tprfpr["fpr"].astype(float)
-        tprfpr.loc[:, "tpr"] = tprfpr["tpr"].astype(float)
+        tprfpr = quantifier_utils.find_tprfpr_by_threshold(self.tprfpr, thr)
 
-        tpr_fpr_difference = tprfpr["tpr"].iloc[0] - tprfpr["fpr"].iloc[0]
-        pos_prop = (cc_ouput - tprfpr["fpr"].iloc[0]) / tpr_fpr_difference
+        tpr_fpr_difference = tprfpr["tpr"] - tprfpr["fpr"]
+        pos_prop = (cc_ouput - tprfpr["fpr"]) / tpr_fpr_difference
 
         # Clamp pos_prop between 0 and 1
         pos_prop = max(0, min(1, pos_prop))

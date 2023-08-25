@@ -28,3 +28,10 @@ def getTPRandFPRbyThreshold(validation_scores):
         arrayOfTPRandFPRByTr = pd.concat([arrayOfTPRandFPRByTr, aux])
 
     return arrayOfTPRandFPRByTr
+
+def find_tprfpr_by_threshold(tprfpr, threshold):
+    tprfpr_threshold = {}
+    instance = tprfpr.query(f"threshold == {threshold}")
+    tprfpr_threshold["fpr"] = instance["fpr"].iloc[0].astype(float)
+    tprfpr_threshold["tpr"] = instance["tpr"].iloc[0].astype(float)
+    return tprfpr_threshold
