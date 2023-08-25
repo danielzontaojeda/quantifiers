@@ -7,6 +7,9 @@ def getTPRandFPRbyThreshold(validation_scores):
     arrayOfTPRandFPRByTr = pd.DataFrame(columns=["threshold", "fpr", "tpr"])
     total_positive = len(validation_scores[validation_scores["class"] == 1])
     total_negative = len(validation_scores[validation_scores["class"] == 0])
+
+    aux = pd.DataFrame(columns=["threshold", "fpr", "tpr"])
+
     for threshold in unique_scores:
         fp = len(
             validation_scores[
@@ -23,9 +26,10 @@ def getTPRandFPRbyThreshold(validation_scores):
         tpr = round(tp / total_positive, 2)
         fpr = round(fp / total_negative, 2)
 
-        aux = pd.DataFrame([[round(threshold, 2), fpr, tpr]])
-        aux.columns = ["threshold", "fpr", "tpr"]
-        arrayOfTPRandFPRByTr = pd.concat([arrayOfTPRandFPRByTr, aux])
+        aux.loc[threshold] = [round(threshold, 2), fpr, tpr]
+
+    arrayOfTPRandFPRByTr = pd.concat([arrayOfTPRandFPRByTr, aux])
+    arrayOfTPRandFPRByTr.reset_index(inplace=True, drop=True)
 
     return arrayOfTPRandFPRByTr
 

@@ -1,7 +1,8 @@
-from quantifiers.classify_count import CC, ACC, PCC, PACC
+from quantifiers.classify_count import CC, ACC, PCC, PACC, X
+from abc import ABC
 
 
-class QuantifierFactory:
+class QuantifierFactory(ABC):
     def create_quantifier(self, quantifier_type):
         quantifier_type = quantifier_type.lower()
         if quantifier_type == "cc":
@@ -13,7 +14,7 @@ class QuantifierFactory:
         elif quantifier_type == "pacc":
             return PACC.PACC()
         elif quantifier_type == "x":
-            return None
+            return X.X()
         elif quantifier_type == "max":
             return None
         elif quantifier_type == "t50":
