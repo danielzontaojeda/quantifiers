@@ -1,4 +1,4 @@
-from quantifiers.classify_count import CC, ACC, PCC
+from quantifiers.classify_count import CC, ACC, PCC, PACC
 
 
 class QuantifierFactory:
