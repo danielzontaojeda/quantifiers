@@ -11,7 +11,7 @@ class QuantifierFactory:
         elif quantifier_type == "pcc":
             return PCC.PCC()
         elif quantifier_type == "pacc":
-            return None
+            return PACC.PACC()
         elif quantifier_type == "x":
             return None
         elif quantifier_type == "max":

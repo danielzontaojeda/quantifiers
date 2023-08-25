@@ -29,6 +29,7 @@ def getTPRandFPRbyThreshold(validation_scores):
 
     return arrayOfTPRandFPRByTr
 
+
 def find_tprfpr_by_threshold(tprfpr, threshold):
     tprfpr_threshold = {}
     instance = tprfpr.query(f"threshold == {threshold}")
