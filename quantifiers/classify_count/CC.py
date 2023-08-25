@@ -1,7 +1,7 @@
 from quantifiers.quantifier import Quantifier
 
 
-class CC(Quantifier):
+class cc(Quantifier):
     def setTprFpr(self, X_train, y_train):
         pass
 

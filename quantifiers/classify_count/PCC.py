@@ -2,7 +2,7 @@ from quantifiers.quantifier import Quantifier
 import numpy as np
 
 
-class PCC(Quantifier):
+class pcc(Quantifier):
     def setTprFpr(self, X_train, y_train):
         pass
 

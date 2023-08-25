@@ -3,7 +3,7 @@ from utils import quantifier_utils
 import numpy as np
 
 
-class PACC(Quantifier):
+class pacc(Quantifier):
     def predict(self, X_test, thr=0.5):
         # TODO: Calibrar
         calibrated_predictions = X_test
