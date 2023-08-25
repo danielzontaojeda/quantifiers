@@ -1,17 +1,14 @@
 from quantifiers.quantifier import Quantifier
+import numpy as np
 
 
 class PCC(Quantifier):
 	def setTprFpr(self, X_train, y_train):
 		pass
 
-	def predict(self, X_test, thr=0.5):
+	def predict(self, X_test, *args):
 		#TODO: Calibrar
 		calibrated_predictions = X_test
-		pcc_count = sum(calibrated_predictions[calibrated_predictions > thr])
-		pos_prop = round(pcc_count/len(calibrated_predictions),2)
-		
-		# Clamp pos_prop between 0 and 1
-		pos_prop = max(0, min(1, pos_prop))
-		
+		pos_prop = np.mean(calibrated_predictions)
+				
 		return pos_prop
