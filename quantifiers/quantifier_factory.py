@@ -1,4 +1,4 @@
-from quantifiers.classify_count import x, acc, cc, pacc, pcc, max, t50
+from quantifiers.classify_count import x, acc, cc, pacc, pcc, max, t50, ms
 from abc import ABC
 
 
@@ -20,7 +20,7 @@ class QuantifierFactory(ABC):
         elif quantifier_type == "t50":
             return t50.t50()
         elif quantifier_type == "ms":
-            return None
+            return ms.ms()
         elif quantifier_type == "hdy":
             return None
         elif quantifier_type == "dys":
