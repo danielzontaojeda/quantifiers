@@ -12,7 +12,6 @@ import numpy as np
 # HDy
 # DyS
 # SORD
-# COUNTERS = ("CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS", "SORD")
 COUNTERS = ("CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS")
 
 # Define how many iterations each sample from the test portion of the dataset will run. This is to make sure a quantifier doesn't get 'lucky' and is tested with a easier subset
