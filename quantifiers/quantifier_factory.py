@@ -1,5 +1,5 @@
 from quantifiers.classify_count import x, acc, cc, pacc, pcc, max, t50, ms
-from quantifiers.distribution_matching import hdy
+from quantifiers.distribution_matching import hdy, dys
 from abc import ABC
 
 
@@ -25,7 +25,7 @@ class QuantifierFactory(ABC):
         elif quantifier_type == "hdy":
             return hdy.hdy()
         elif quantifier_type == "dys":
-            return None
+            return dys.dys()
         elif quantifier_type == "sord":
             return None
         else:
