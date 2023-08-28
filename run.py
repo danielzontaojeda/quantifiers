@@ -98,7 +98,6 @@ def run_quantifiers(scores, classes):
                         result = pd.DataFrame([result])
 
                         table = pd.concat([table, result], ignore_index=True)
-    print(table)
     return table
 
 
@@ -114,7 +113,10 @@ def main():
     scores = df["score"]
     classes = df["class"]
 
-    run_quantifiers(scores, classes)
+    table = run_quantifiers(scores, classes)
+    print(table)
+    table.to_csv('output.csv')
+    print('Data saved successfully', index=False)
 
 
 if __name__ == "__main__":
