@@ -1,5 +1,5 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 from quantifiers.quantifier import Quantifier
 from utils import quantifier_utils

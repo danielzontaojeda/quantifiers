@@ -1,6 +1,7 @@
+import numpy as np
+
 from quantifiers.quantifier import Quantifier
 from utils import quantifier_utils
-import numpy as np
 
 
 class pacc(Quantifier):

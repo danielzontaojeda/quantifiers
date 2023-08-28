@@ -1,5 +1,6 @@
-from quantifiers.quantifier import Quantifier
 import numpy as np
+
+from quantifiers.quantifier import Quantifier
 
 
 class MAX(Quantifier):
