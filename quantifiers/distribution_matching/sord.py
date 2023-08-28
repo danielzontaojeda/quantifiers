@@ -6,7 +6,7 @@ from utils import quantifier_utils
 
 
 class sord(Quantifier):
-    def predict(self, test_scores, *args, **kwargs):
+    def predict(self, test_scores, *args):
         alpha = np.linspace(0, 1, 101)
         sc_1 = self.pos_scores
         sc_2 = self.neg_scores
