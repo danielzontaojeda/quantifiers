@@ -21,7 +21,7 @@ class hdy(Quantifier):
                     quantifier_utils.DyS_distance(
                         ((p_bin_count * x) + (n_bin_count * (1 - x))),
                         te_bin_count,
-                        measure="hellinger",
+                        measure="topsoe",
                     )
                 )
 

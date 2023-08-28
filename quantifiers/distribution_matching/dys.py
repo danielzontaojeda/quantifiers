@@ -24,5 +24,3 @@ class dys(Quantifier):
             result.append(quantifier_utils.ternary_search(0, 1, f))
         pos_prop = np.median(result)
         return pos_prop
-
-

@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from config import COUNTERS, N_ITERATIONS, ALPHA_VALUES, BATCH_SIZES, MEASURE
 from quantifiers.quantifier_factory import QuantifierFactory
+from tqdm import tqdm
 
 
 def apply_quantifier(quantifier_name, thr, measure, train_test, test_sample):
@@ -44,6 +45,9 @@ def run_quantifiers(scores, classes):
     df_test = pd.concat([X_test, y_test], axis="columns")
     df_test_pos = df_test.query("`class` == 1")
     df_test_neg = df_test.query("`class` == 0")
+
+    total_iterations = len(BATCH_SIZES) * len(ALPHA_VALUES) * N_ITERATIONS
+    overall_bar = tqdm(total=total_iterations, desc="Progress")
 
     # Sampling the dataset to run tests
     for sample_size in BATCH_SIZES:
@@ -98,6 +102,8 @@ def run_quantifiers(scores, classes):
                         result = pd.DataFrame([result])
 
                         table = pd.concat([table, result], ignore_index=True)
+            overall_bar.update(1)
+    overall_bar.close()
     return table
 
 
@@ -115,8 +121,8 @@ def main():
 
     table = run_quantifiers(scores, classes)
     print(table)
-    table.to_csv('output.csv')
-    print('Data saved successfully', index=False)
+    table.to_csv("output.csv", index=False)
+    print("Data saved successfully")
 
 
 if __name__ == "__main__":
