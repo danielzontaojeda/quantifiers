@@ -10,6 +10,8 @@ def apply_quantifier(quantifier_name, thr, measure, train_test, test_sample):
     factory = QuantifierFactory()
     quantifier = factory.create_quantifier(quantifier_name)
     if quantifier:
+        if quantifier_name == "HDy":
+            quantifier.set_scores(train_test)
         quantifier.setTprFpr(train_test["X_train"], train_test["y_train"])
         return quantifier.predict(test_sample, thr)
 
