@@ -9,7 +9,26 @@ class hdy(Quantifier):
     def predict(self, test_scores, *args, **kwargs):
         bin_size = np.linspace(10, 110, 11)
         alpha_values = np.linspace(0, 1, 101)
-        return None
+        result = []
+        for bins in bin_size:
+            p_bin_count = quantifier_utils.get_hist(self.pos_scores, bins)
+            n_bin_count = quantifier_utils.get_hist(self.neg_scores, bins)
+            te_bin_count = quantifier_utils.get_hist(test_scores, bins)
+            vDist = []
+            for x in alpha_values:
+                x = np.round(x, 2)
+                vDist.append(
+                    quantifier_utils.DyS_distance(
+                        ((p_bin_count * x) + (n_bin_count * (1 - x))),
+                        te_bin_count,
+                        measure="hellinger",
+                    )
+                )
+
+        result.append(alpha_values[np.argmin(vDist)])
+        pos_prop = np.median(result)
+
+        return pos_prop
 
     def set_scores(self, train_test_scores):
         scores = {
