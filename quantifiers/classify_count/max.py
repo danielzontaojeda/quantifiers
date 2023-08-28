@@ -3,7 +3,7 @@ import numpy as np
 
 
 class MAX(Quantifier):
-    def predict(self, scores, *args):
+    def predict(self, scores, *args, **kwargs):
         diff_tpr_fpr = list(abs(self.tprfpr["tpr"] - self.tprfpr["fpr"]))
         max_index = diff_tpr_fpr.index(max(diff_tpr_fpr))
         threshold, fpr, tpr = self.tprfpr.loc[max_index]

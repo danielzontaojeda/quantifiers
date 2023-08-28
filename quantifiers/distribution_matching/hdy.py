@@ -6,7 +6,7 @@ from utils import quantifier_utils
 
 
 class hdy(Quantifier):
-    def predict(self, test_scores, *args):
+    def predict(self, test_scores, *args, **kwargs):
         bin_size = np.linspace(10, 110, 11)
         alpha_values = np.linspace(0, 1, 101)
         result = []
@@ -21,7 +21,7 @@ class hdy(Quantifier):
                     quantifier_utils.DyS_distance(
                         ((p_bin_count * x) + (n_bin_count * (1 - x))),
                         te_bin_count,
-                        measure="topsoe",
+                        measure=kwargs["measure"],
                     )
                 )
 

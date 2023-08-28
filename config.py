@@ -23,5 +23,8 @@ BATCH_SIZES = [100, 200, 300, 400, 500]
 # Define different positive proportions for the samples
 ALPHA_VALUES = [round(x, 2) for x in np.linspace(0, 1, 11)]
 
-# TODO: adicionar descrição
+# Method to measure distance, options are:
+# topsoe
+# hellinger
+# probsymm
 MEASURE = "topsoe"

@@ -5,7 +5,7 @@ from utils import quantifier_utils
 
 
 class dys(Quantifier):
-    def predict(self, test_scores, *args):
+    def predict(self, test_scores, *args, **kwargs):
         bin_size = np.linspace(10, 110, 11)
         result = []
         for bins in bin_size:
@@ -17,7 +17,7 @@ class dys(Quantifier):
                 return quantifier_utils.DyS_distance(
                     ((p_bin_count * x) + (n_bin_count * (1 - x))),
                     te_bin_count,
-                    measure="topsoe",
+                    measure=kwargs["measure"],
                 )
 
             result.append(quantifier_utils.ternary_search(0, 1, f))

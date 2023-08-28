@@ -5,7 +5,7 @@ from utils import quantifier_utils
 
 
 class acc(Quantifier):
-    def predict(self, test_scores, thr=0.5):
+    def predict(self, test_scores, thr=0.5, *args, **kwargs):
         count = sum(1 for i in test_scores if i >= thr)
         cc_ouput = round(count / len(test_scores), 2)
 

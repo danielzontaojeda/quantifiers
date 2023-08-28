@@ -3,7 +3,7 @@ import numpy as np
 
 
 class t50(Quantifier):
-    def predict(self, scores, thr):
+    def predict(self, scores, thr, *args, **kwargs):
         index = np.abs(self.tprfpr["tpr"] - thr).idxmin()
         threshold, fpr, tpr = self.tprfpr.loc[index]
         class_prop = np.mean(scores >= threshold)

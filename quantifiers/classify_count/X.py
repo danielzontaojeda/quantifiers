@@ -3,7 +3,7 @@ import numpy as np
 
 
 class x(Quantifier):
-    def predict(self, scores, *args):
+    def predict(self, scores, *args, **kwargs):
         absolute_diff = np.abs((1 - self.tprfpr["tpr"]) - self.tprfpr["fpr"])
         min_index = absolute_diff.idxmin()
 

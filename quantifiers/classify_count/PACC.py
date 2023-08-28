@@ -4,7 +4,7 @@ import numpy as np
 
 
 class pacc(Quantifier):
-    def predict(self, X_test, thr=0.5):
+    def predict(self, X_test, thr=0.5, *args, **kwargs):
         # TODO: Calibrar
         calibrated_predictions = X_test
         tprfpr = quantifier_utils.find_tprfpr_by_threshold(self.tprfpr, thr)
