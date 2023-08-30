@@ -5,7 +5,7 @@ from utils import quantifier_utils
 
 
 class dys(Quantifier):
-    def predict(self, test_scores, *args, **kwargs):
+    def predict(self, test_scores, **kwargs):
         bin_size = np.linspace(10, 110, 11)
         result = []
         for bins in bin_size:

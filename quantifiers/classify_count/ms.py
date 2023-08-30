@@ -5,7 +5,7 @@ from utils import quantifier_utils
 
 
 class ms(Quantifier):
-    def predict(self, scores, *args, **kwargs):
+    def predict(self, scores, **kwargs):
         unique_scores = np.arange(0.01, 1, 0.01)
         prevalences_array = []
 

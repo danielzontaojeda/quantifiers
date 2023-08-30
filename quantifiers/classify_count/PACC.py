@@ -5,10 +5,12 @@ from utils import quantifier_utils
 
 
 class pacc(Quantifier):
-    def predict(self, X_test, thr=0.5, *args, **kwargs):
+    def predict(self, X_test, **kwargs):
         # TODO: Calibrar
         calibrated_predictions = X_test
-        tprfpr = quantifier_utils.find_tprfpr_by_threshold(self.tprfpr, thr)
+        tprfpr = quantifier_utils.find_tprfpr_by_threshold(
+            self.tprfpr, kwargs["threshold"]
+        )
         pos_prop = np.mean(calibrated_predictions)
         diff_tpr_fpr = tprfpr["tpr"] - tprfpr["fpr"]
         pos_prop = (pos_prop - tprfpr["fpr"]) / diff_tpr_fpr

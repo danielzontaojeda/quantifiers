@@ -5,7 +5,7 @@ from utils import quantifier_utils
 
 
 class smm(Quantifier):
-    def predict(self, test_scores, *args, **kwargs):
+    def predict(self, test_scores, **kwargs):
         mean_pos_scr = np.mean(self.pos_scores)
         mean_neg_scr = np.mean(self.neg_scores)
         mean_te_scr = np.mean(test_scores)

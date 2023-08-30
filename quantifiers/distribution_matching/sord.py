@@ -4,14 +4,14 @@ from quantifiers.quantifier import Quantifier
 
 
 class sord(Quantifier):
-    def predict(self, test_scores, *args, **kwargs):
+    def predict(self, test_scores, **kwargs):
         alpha = np.linspace(0, 1, 101)
         ts = test_scores
 
         vDist = []
         for k in alpha:
-            pos = np.array(self.pos_scores['scores'])
-            neg = np.array(self.neg_scores['scores'])
+            pos = np.array(self.pos_scores["scores"])
+            neg = np.array(self.neg_scores["scores"])
             test = np.array(ts)
             pos_prop = k
 
