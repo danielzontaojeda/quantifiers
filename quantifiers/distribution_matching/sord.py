@@ -10,8 +10,8 @@ class sord(Quantifier):
 
         vDist = []
         for k in alpha:
-            pos = np.array(self.pos_scores["scores"])
-            neg = np.array(self.neg_scores["scores"])
+            pos = np.array(self.pos_scores['scores'])
+            neg = np.array(self.neg_scores['scores'])
             test = np.array(ts)
             pos_prop = k
 

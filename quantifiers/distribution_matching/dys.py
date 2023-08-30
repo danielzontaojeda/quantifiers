@@ -17,7 +17,7 @@ class dys(Quantifier):
                 return quantifier_utils.DyS_distance(
                     ((p_bin_count * x) + (n_bin_count * (1 - x))),
                     te_bin_count,
-                    measure=kwargs["measure"],
+                    measure=kwargs['measure'],
                 )
 
             result.append(quantifier_utils.ternary_search(0, 1, f))

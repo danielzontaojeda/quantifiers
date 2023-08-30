@@ -6,23 +6,23 @@ from utils.distances import Distances
 
 def getTPRandFPRbyThreshold(validation_scores):
     unique_scores = np.arange(0, 1, 0.01)
-    arrayOfTPRandFPRByTr = pd.DataFrame(columns=["threshold", "fpr", "tpr"])
-    total_positive = len(validation_scores[validation_scores["class"] == 1])
-    total_negative = len(validation_scores[validation_scores["class"] == 0])
+    arrayOfTPRandFPRByTr = pd.DataFrame(columns=['threshold', 'fpr', 'tpr'])
+    total_positive = len(validation_scores[validation_scores['class'] == 1])
+    total_negative = len(validation_scores[validation_scores['class'] == 0])
 
-    aux = pd.DataFrame(columns=["threshold", "fpr", "tpr"])
+    aux = pd.DataFrame(columns=['threshold', 'fpr', 'tpr'])
 
     for threshold in unique_scores:
         fp = len(
             validation_scores[
-                (validation_scores["score"] > threshold)
-                & (validation_scores["class"] == 0)
+                (validation_scores['score'] > threshold)
+                & (validation_scores['class'] == 0)
             ]
         )
         tp = len(
             validation_scores[
-                (validation_scores["score"] > threshold)
-                & (validation_scores["class"] == 1)
+                (validation_scores['score'] > threshold)
+                & (validation_scores['class'] == 1)
             ]
         )
         tpr = round(tp / total_positive, 2)
@@ -38,9 +38,9 @@ def getTPRandFPRbyThreshold(validation_scores):
 
 def find_tprfpr_by_threshold(tprfpr, threshold):
     tprfpr_threshold = {}
-    instance = tprfpr.query(f"threshold == {threshold}")
-    tprfpr_threshold["fpr"] = instance["fpr"].iloc[0].astype(float)
-    tprfpr_threshold["tpr"] = instance["tpr"].iloc[0].astype(float)
+    instance = tprfpr.query(f'threshold == {threshold}')
+    tprfpr_threshold['fpr'] = instance['fpr'].iloc[0].astype(float)
+    tprfpr_threshold['tpr'] = instance['tpr'].iloc[0].astype(float)
     return tprfpr_threshold
 
 
@@ -60,21 +60,21 @@ def get_hist(scores, nbins):
 
 
 def DyS_distance(sc_1, sc_2, measure):
-    """This function applies a selected distance metric"""
+    '''This function applies a selected distance metric'''
 
     dist = Distances(sc_1, sc_2)
 
-    if measure == "topsoe":
+    if measure == 'topsoe':
         return dist.topsoe()
-    if measure == "probsymm":
+    if measure == 'probsymm':
         return dist.probsymm()
-    if measure == "hellinger":
+    if measure == 'hellinger':
         return dist.hellinger()
     return 100
 
 
 def ternary_search(left, right, f, eps=1e-4):
-    """This function applies Ternary search"""
+    '''This function applies Ternary search'''
 
     while True:
         if abs(left - right) < eps:
