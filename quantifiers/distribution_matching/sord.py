@@ -6,14 +6,12 @@ from quantifiers.quantifier import Quantifier
 class sord(Quantifier):
     def predict(self, test_scores, *args, **kwargs):
         alpha = np.linspace(0, 1, 101)
-        sc_1 = self.pos_scores
-        sc_2 = self.neg_scores
         ts = test_scores
 
         vDist = []
         for k in alpha:
-            pos = np.array(sc_1)
-            neg = np.array(sc_2)
+            pos = np.array(self.pos_scores['scores'])
+            neg = np.array(self.neg_scores['scores'])
             test = np.array(ts)
             pos_prop = k
 
@@ -21,10 +19,9 @@ class sord(Quantifier):
             n_w = (1 - pos_prop) / len(neg)
             t_w = -1 / len(test)
 
-            p = list(map(lambda x: (x, p_w), pos))
-            n = list(map(lambda x: (x, n_w), neg))
-            t = list(map(lambda x: (x, t_w), test))
-            print(p)
+            p = [(x, p_w) for x in pos]
+            n = [(x, n_w) for x in neg]
+            t = [(x, t_w) for x in test]
 
             v = sorted(p + n + t, key=lambda x: x[0])
 

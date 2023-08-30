@@ -13,7 +13,20 @@ import numpy as np
 # DyS
 # SORD
 # SMM
-COUNTERS = ("CC", "ACC", "PCC", "PACC", "X", "MAX", "T50", "MS", "HDy", "DyS")
+COUNTERS = (
+    "CC",
+    "ACC",
+    "PCC",
+    "PACC",
+    "X",
+    "MAX",
+    "T50",
+    "MS",
+    "HDy",
+    "DyS",
+    "SORD",
+    "SMM",
+)
 
 # Define how many iterations each sample from the test portion of the dataset will run. This is to make sure a quantifier doesn't get 'lucky' and is tested with a easier subset
 N_ITERATIONS = 3
