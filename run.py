@@ -124,7 +124,7 @@ def main():
     table.to_csv("output.csv", index=False)
     print("Data saved successfully")
     average_abs_error = table.groupby('quantifier')['abs_error'].mean()
-    average_abs_error.sort_values()
+    average_abs_error = average_abs_error.sort_values()
     print("Average error:")
     print(average_abs_error)
 

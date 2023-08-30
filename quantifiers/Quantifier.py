@@ -5,7 +5,7 @@ import pandas as pd
 
 class Quantifier(ABC):
     def __init__(self):
-        self.needs_dist_matching = ["hdy", "dys", "sord"]
+        self.needs_dist_matching = ["hdy", "dys", "sord", "smm"]
 
     @abstractmethod
     def predict(self, X_test):
@@ -19,8 +19,8 @@ class Quantifier(ABC):
 
     def set_scores(self, train_test_scores):
         scores = {
-            "scores": train_test_scores["X_test"],
-            "class": train_test_scores["y_test"],
+            "scores": train_test_scores["X_train"],
+            "class": train_test_scores["y_train"],
         }
         df = pd.DataFrame(scores)
         self.pos_scores = df.query("`class`== 1")

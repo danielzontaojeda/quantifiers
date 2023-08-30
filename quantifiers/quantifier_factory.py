@@ -1,5 +1,5 @@
 from quantifiers.classify_count import x, acc, cc, pacc, pcc, max, t50, ms
-from quantifiers.distribution_matching import hdy, dys, sord
+from quantifiers.distribution_matching import hdy, dys, sord, smm
 from abc import ABC
 
 
@@ -28,6 +28,8 @@ class QuantifierFactory(ABC):
             return dys.dys()
         elif quantifier_type == "sord":
             return sord.sord()
+        elif quantifier_type == "smm":
+            return smm.smm()
         else:
             print(f"Invalid quantifier: {quantifier_type}")
             return None
