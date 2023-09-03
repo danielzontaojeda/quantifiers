@@ -87,3 +87,7 @@ def ternary_search(left, right, f, eps=1e-4):
             left = leftThird
         else:
             right = rightThird
+
+
+def calculate_accuracy():
+    pass

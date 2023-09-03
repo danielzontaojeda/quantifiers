@@ -5,7 +5,7 @@ from quantifiers.quantifier import Quantifier
 
 class MAX(Quantifier):
     def predict(self, scores, **kwargs):
-        diff_tpr_fpr = list(abs(self.tprfpr["tpr"] - self.tprfpr["fpr"]))
+        diff_tpr_fpr = list(abs(self.tprfpr['tpr'] - self.tprfpr['fpr']))
         max_index = diff_tpr_fpr.index(max(diff_tpr_fpr))
         threshold, fpr, tpr = self.tprfpr.loc[max_index]
         class_prop = np.mean(scores >= threshold)

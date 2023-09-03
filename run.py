@@ -68,8 +68,6 @@ def run_quantifiers(scores, classes):
                 test_sample = sample_test.drop(['class'], axis=1)
                 test_sample = test_sample['score'].astype(float)
 
-                # TODO: por que calcular isso, nao é sempre alpha?
-
                 # Counting num of actual positives in test sample
                 n_pos_sample_test = list(test_label).count(1)
 
