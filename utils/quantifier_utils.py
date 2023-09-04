@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
+import bisect
+import math
 
 from utils.distances import Distances
+from sklearn.metrics import confusion_matrix
 
 
 def getTPRandFPRbyThreshold(validation_scores):
@@ -89,5 +92,38 @@ def ternary_search(left, right, f, eps=1e-4):
             right = rightThird
 
 
-def calculate_accuracy():
-    pass
+def find_best_threshold(scores, pos_prop, threshold=0.5, tolerance=0.01):
+    low = 0.0
+    high = 1.0
+    max_iterations = math.ceil(math.log2(len(scores)))
+    for _ in range(max_iterations):
+        positive_proportion = sum(
+            1 for score in scores if score > threshold) / len(scores)
+        if abs(positive_proportion - pos_prop) < tolerance:
+            return threshold
+        if positive_proportion > pos_prop:
+            low = threshold
+            threshold = (threshold + high) / 2
+        else:
+            high = threshold
+            threshold = (threshold + low) / 2
+    return threshold
+
+
+def calculate_accuracy(test_sample, test_label, pred_prop, threshold):
+    scores_list = test_sample.to_list()
+    scores_list = sorted(scores_list)
+    # find the index where the threshold would be inserted
+    best_threshold = find_best_threshold(scores_list, pred_prop)
+
+    y_true = test_label.to_list()
+    y_pred = [1 if score > best_threshold else 0 for score in scores_list]
+    cm = confusion_matrix(y_true, y_pred)
+    tn = cm[0, 0]
+    if tn == len(scores_list):
+        return 1
+    fp = cm[0, 1]
+    fn = cm[1, 0]
+    tp = cm[1, 1]
+    acc = (tp + tn) / (tp + tn + fp + fn)
+    return round(acc, 2)
