@@ -119,10 +119,6 @@ def main():
         print(r"python run.py {dataset_name}.csv")
         exit(1)
 
-    file = os.path.abspath(__file__)
-    project_dir = os.path.dirname(os.path.dirname(file))
-    sys.path.append(project_dir)
-
     dataset_name = sys.argv[1]
     df = pd.read_csv(dataset_name)
     scores = df["score"]
@@ -139,4 +135,9 @@ def main():
 
 
 if __name__ == "__main__":
+    file = os.path.abspath(__file__)
+    project_dir = os.path.dirname(os.path.dirname(file))
+    print(project_dir)
+    sys.path.append(project_dir)
+
     main()

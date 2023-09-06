@@ -7,8 +7,8 @@ pip install venv
 git clone https://github.com/danielzontaojeda/quantifiers
 cd quantifiers
 python -m venv .venv
-(UNIX) source env/bin/activate 
-(Windows) .\.venv\Scripts\activate 
+source env/bin/activate # (UNIX) 
+.\.venv\Scripts\activate # (Windows) 
 pip install -r requirements.txt
 python run.py dataset.csv
 ```
