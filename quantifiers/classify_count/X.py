@@ -5,7 +5,7 @@ from quantifiers.quantifier import Quantifier
 
 class x(Quantifier):
     def predict(self, scores, **kwargs):
-        absolute_diff = np.abs((1 - self.tprfpr['tpr']) - self.tprfpr['fpr'])
+        absolute_diff = np.abs((1 - self.tprfpr["tpr"]) - self.tprfpr["fpr"])
         min_index = absolute_diff.idxmin()
 
         threshold, fpr, tpr = self.tprfpr.iloc[min_index]

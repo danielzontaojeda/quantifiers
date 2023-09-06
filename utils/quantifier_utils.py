@@ -1,31 +1,30 @@
 import pandas as pd
 import numpy as np
-import bisect
 import math
 
 from utils.distances import Distances
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score
 
 
 def getTPRandFPRbyThreshold(validation_scores):
     unique_scores = np.arange(0, 1, 0.01)
-    arrayOfTPRandFPRByTr = pd.DataFrame(columns=['threshold', 'fpr', 'tpr'])
-    total_positive = len(validation_scores[validation_scores['class'] == 1])
-    total_negative = len(validation_scores[validation_scores['class'] == 0])
+    arrayOfTPRandFPRByTr = pd.DataFrame(columns=["threshold", "fpr", "tpr"])
+    total_positive = len(validation_scores[validation_scores["class"] == 1])
+    total_negative = len(validation_scores[validation_scores["class"] == 0])
 
-    aux = pd.DataFrame(columns=['threshold', 'fpr', 'tpr'])
+    aux = pd.DataFrame(columns=["threshold", "fpr", "tpr"])
 
     for threshold in unique_scores:
         fp = len(
             validation_scores[
-                (validation_scores['score'] > threshold)
-                & (validation_scores['class'] == 0)
+                (validation_scores["score"] > threshold)
+                & (validation_scores["class"] == 0)
             ]
         )
         tp = len(
             validation_scores[
-                (validation_scores['score'] > threshold)
-                & (validation_scores['class'] == 1)
+                (validation_scores["score"] > threshold)
+                & (validation_scores["class"] == 1)
             ]
         )
         tpr = round(tp / total_positive, 2)
@@ -41,9 +40,9 @@ def getTPRandFPRbyThreshold(validation_scores):
 
 def find_tprfpr_by_threshold(tprfpr, threshold):
     tprfpr_threshold = {}
-    instance = tprfpr.query(f'threshold == {threshold}')
-    tprfpr_threshold['fpr'] = instance['fpr'].iloc[0].astype(float)
-    tprfpr_threshold['tpr'] = instance['tpr'].iloc[0].astype(float)
+    instance = tprfpr.query(f"threshold == {threshold}")
+    tprfpr_threshold["fpr"] = instance["fpr"].iloc[0].astype(float)
+    tprfpr_threshold["tpr"] = instance["tpr"].iloc[0].astype(float)
     return tprfpr_threshold
 
 
@@ -63,21 +62,21 @@ def get_hist(scores, nbins):
 
 
 def DyS_distance(sc_1, sc_2, measure):
-    '''This function applies a selected distance metric'''
+    """This function applies a selected distance metric"""
 
     dist = Distances(sc_1, sc_2)
 
-    if measure == 'topsoe':
+    if measure == "topsoe":
         return dist.topsoe()
-    if measure == 'probsymm':
+    if measure == "probsymm":
         return dist.probsymm()
-    if measure == 'hellinger':
+    if measure == "hellinger":
         return dist.hellinger()
     return 100
 
 
 def ternary_search(left, right, f, eps=1e-4):
-    '''This function applies Ternary search'''
+    """This function applies Ternary search"""
 
     while True:
         if abs(left - right) < eps:
@@ -95,10 +94,11 @@ def ternary_search(left, right, f, eps=1e-4):
 def find_best_threshold(scores, pos_prop, threshold=0.5, tolerance=0.01):
     low = 0.0
     high = 1.0
-    max_iterations = math.ceil(math.log2(len(scores)))
+    max_iterations = math.ceil(math.log2(len(scores))) * 2 + 10
     for _ in range(max_iterations):
-        positive_proportion = sum(
-            1 for score in scores if score > threshold) / len(scores)
+        positive_proportion = sum(1 for score in scores if score > threshold) / len(
+            scores
+        )
         if abs(positive_proportion - pos_prop) < tolerance:
             return threshold
         if positive_proportion > pos_prop:
@@ -110,20 +110,13 @@ def find_best_threshold(scores, pos_prop, threshold=0.5, tolerance=0.01):
     return threshold
 
 
-def calculate_accuracy(test_sample, test_label, pred_prop, threshold):
+def calculate_accuracy(test_sample, test_label, pred_prop):
     scores_list = test_sample.to_list()
-    scores_list = sorted(scores_list)
+    sorted_list = sorted(scores_list)
     # find the index where the threshold would be inserted
-    best_threshold = find_best_threshold(scores_list, pred_prop)
+    best_threshold = find_best_threshold(sorted_list, pred_prop)
 
     y_true = test_label.to_list()
     y_pred = [1 if score > best_threshold else 0 for score in scores_list]
-    cm = confusion_matrix(y_true, y_pred)
-    tn = cm[0, 0]
-    if tn == len(scores_list):
-        return 1
-    fp = cm[0, 1]
-    fn = cm[1, 0]
-    tp = cm[1, 1]
-    acc = (tp + tn) / (tp + tn + fp + fn)
+    acc = accuracy_score(y_true, y_pred)
     return round(acc, 2)

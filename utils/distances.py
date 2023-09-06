@@ -4,9 +4,9 @@ import numpy as np
 class Distances(object):
     def __init__(self, P, Q):
         if sum(P) < 1e-20 or sum(Q) < 1e-20:
-            raise 'One or both vector are zero (empty)...'
+            raise "One or both vector are zero (empty)..."
         if len(P) != len(Q):
-            raise 'Arrays need to be of equal sizes...'
+            raise "Arrays need to be of equal sizes..."
         # use numpy arrays for efficient coding
         P = np.array(P, dtype=float)
         Q = np.array(Q, dtype=float)

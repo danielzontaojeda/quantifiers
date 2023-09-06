@@ -5,7 +5,7 @@ from quantifiers.quantifier import Quantifier
 
 class t50(Quantifier):
     def predict(self, scores, **kwargs):
-        index = np.abs(self.tprfpr['tpr'] - kwargs['threshold']).idxmin()
+        index = np.abs(self.tprfpr["tpr"] - kwargs["threshold"]).idxmin()
         threshold, fpr, tpr = self.tprfpr.loc[index]
         class_prop = np.mean(scores >= threshold)
         if (tpr - fpr) == 0:
