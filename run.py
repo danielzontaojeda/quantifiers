@@ -1,4 +1,5 @@
 import sys
+import os
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -73,7 +74,8 @@ def run_quantifiers(scores, classes):
                 n_pos_sample_test = list(test_label).count(1)
 
                 # actual pos class prevalence in generated sample
-                calcultd_pos_prop = round(n_pos_sample_test / len(sample_test), 2)
+                calcultd_pos_prop = round(
+                    n_pos_sample_test / len(sample_test), 2)
 
                 for quantifier in COUNTERS:
                     pred_pos_prop = apply_quantifier(
@@ -84,14 +86,15 @@ def run_quantifiers(scores, classes):
                         test_sample=test_sample,
                     )
                     accuracy = quantifier_utils.calculate_accuracy(
-                        test_sample, test_label, pred_pos_prop, threshold
+                        test_sample, test_label, pred_pos_prop
                     )
                     if pred_pos_prop:
                         # Getting only the positive proportion
                         pred_pos_prop = round(pred_pos_prop, 2)
 
                         # ---------------RESULTS---------------
-                        abs_error = round(abs(calcultd_pos_prop - pred_pos_prop), 2)
+                        abs_error = round(
+                            abs(calcultd_pos_prop - pred_pos_prop), 2)
                         result = {
                             "sample": iteration + 1,
                             "Test_size": sample_size,
@@ -115,6 +118,10 @@ def main():
         print("ERROR! Dataset name should be passed as an argument:")
         print(r"python run.py {dataset_name}.csv")
         exit(1)
+
+    file = os.path.abspath(__file__)
+    project_dir = os.path.dirname(os.path.dirname(file))
+    sys.path.append(project_dir)
 
     dataset_name = sys.argv[1]
     df = pd.read_csv(dataset_name)
