@@ -4,8 +4,11 @@ Implementation of [quantifiers](https://www.researchgate.net/publication/2422228
 
 ```
 pip install venv
-python -m venv .venv
 git clone https://github.com/danielzontaojeda/quantifiers
+cd quantifiers
+python -m venv .venv
+(UNIX) source env/bin/activate 
+(Windows) .\env\Scripts\activate 
 pip install -r requirements.txt
 python run.py dataset.csv
 ```
