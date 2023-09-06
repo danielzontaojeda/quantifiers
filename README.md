@@ -8,7 +8,7 @@ git clone https://github.com/danielzontaojeda/quantifiers
 cd quantifiers
 python -m venv .venv
 (UNIX) source env/bin/activate 
-(Windows) .\venv\Scripts\activate 
+(Windows) .\.venv\Scripts\activate 
 pip install -r requirements.txt
 python run.py dataset.csv
 ```
